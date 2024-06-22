@@ -1,0 +1,90 @@
+{% extends 'base.html'%}
+
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION PAGETOP ========================= -->
+<section class="section-pagetop bg">
+    <div class="container">
+            <h2 class="title-page">Our Store</h2>
+    </div> <!-- container //  -->
+</section>
+
+<!-- ========================= SECTION INTRO END// ========================= -->
+
+<!-- ========================= SECTION CONTENT ========================= -->
+<section class="section-content padding-y">
+    <div class="container">
+        <div class="row">
+
+<main class="col-md-12">
+    <header class="border-bottom mb-4 pb-3">
+        <div class="form-inline">
+            <span class="mr-md-auto"> <b>{{ product_count }}</b> Items Found -  </span>            
+        </div>
+    </header>
+
+    <div class="row">
+
+        {% if products %}
+        {% for product in products %}
+
+        <div class="col-md-3">
+            <figure class="card card-product-grid">
+                <div class="img-wrap"> 
+                    <a href="{{ product.get_url }}">  <img src="{{ product.image.url }}"> </a>
+                </div> 
+            <figcaption class="info-wrap">
+                <div class="fix-height">
+                    <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                    <div class="price-wrap mt-2">
+                        <span class="price"> Rs. {{ product.price }}</span>
+                    </div> <!-- price-wrap.// -->
+                    </div> <!-- fix-height //-->
+                    <a href="{{ product.get_url }}" class="btn btn-block btn-primary"> View Details </a>
+            </figcaption>
+            </figure>
+        </div> 
+
+        {% endfor %}
+        
+        {% else %}
+
+        <div class="col-md-12">
+            <h2> No Products Found ... </h2>
+        </div>
+
+        {% endif %}
+    </div> 
+    <nav class="mt-4" aria-label="Page navigation sample">
+        {% if products.has_other_pages %}
+            <ul class="pagination">
+                {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+                {% endif %}
+    
+                {% for i in products.paginator.page_range %}
+                    {% if products.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% elif i > products.number|add:'-5' and i < products.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+    
+                {% if products.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </nav>
+    
+</main> 
+</div>
+</div> <!-- container .//  -->
+</section>
+<!-- ========================= SECTION CONTENT END// ========================= -->   
+
+{% endblock %}

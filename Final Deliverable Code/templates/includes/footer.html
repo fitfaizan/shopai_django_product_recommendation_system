@@ -1,0 +1,36 @@
+<!-- ========================= FOOTER ========================= -->
+<footer class="section-footer border-top">
+    <div class="container">
+        <section class="footer-bottom border-top row align-items-center">
+            <div class="col-md-5 text-md-center">
+                <p class="text-muted">&copy; FITFAIZAN Created Project Ltd.</p>
+            </div>
+            <div class="col-md-4 text-md-left">
+                {% if request.path == '/customer_support/' %}
+                    <span class="btn btn-success px-3 disabled">Customer Support</span>
+                {% else %}
+                    <a href="{% url 'customer_support' %}" class="btn btn-primary px-3">Customer Support</a>
+                {% endif %}
+            </div>
+            <div class="col-md-3 text-md-center text-muted">
+                <i class="fab fa-lg fa-cc-visa mx-1"></i>
+                <i class="fab fa-lg fa-cc-paypal mx-1"></i>
+                <i class="fab fa-lg fa-cc-mastercard mx-1"></i>
+            </div>
+        </section>
+    </div><!-- //container -->
+</footer>
+
+<!-- ========================= FOOTER END // ========================= -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+	$(document).ready(function(){
+		$(".thumb a").click(function(e){
+			e.preventDefault();
+			$(".mainImage img").attr("src",$(this).attr("href"));
+	})
+	})
+</script>
+
+</body>
+</html>

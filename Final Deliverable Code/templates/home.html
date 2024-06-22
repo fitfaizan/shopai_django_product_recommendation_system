@@ -1,0 +1,87 @@
+
+    {% extends "base.html" %}
+
+    {% load static %}
+
+    {% block content %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+    {% include 'includes/alerts.html' %}
+    <div class="container">
+        <div class="intro-banner-wrap" style="max-width: 100%; overflow: hidden;">
+            <img src="{% static 'images/banners/cover-photo.jpg' %}" class="img-fluid rounded" style="width: 100%;">
+        </div>
+    </div> <!-- container //  -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+<!-- ========================= SECTION  ========================= -->
+
+<section class="section-name padding-y-sm">
+    <div class="container">
+
+
+        <header class="section-heading">
+            <h3 class="section-title">Recommended Products</h3>
+        </header>
+
+
+        <div class="row">
+            {% if recommended_products %}
+                {% for product in recommended_products %}
+                    <div class="col-md-3">
+                        <figure class="card card-product-grid">
+                            <div class="img-wrap"> 
+                                <a href="{{ product.get_url }}">  
+                                    <img src="{{ product.image.url }}"> 
+                                </a>
+                            </div> 
+                            <figcaption class="info-wrap">
+                                <div class="fix-height">
+                                    <a href="{{ product.get_url }}" class="title">{{ product.product_name }}</a>
+                                    <div class="price-wrap mt-2">
+                                        <span class="price"> Rs. {{ product.price }}</span>
+                                    </div> <!-- price-wrap.// -->
+                                </div> <!-- fix-height //-->
+                                <a href="{{ product.get_url }}" class="btn btn-block btn-primary"> View Details </a>
+                            </figcaption>
+                        </figure>
+                    </div> 
+                {% endfor %}
+            {% endif %}
+        </div> <!-- row // -->
+
+        
+<nav class="mt-4" aria-label="Page navigation sample">
+        {% if products.has_other_pages %}
+            <ul class="pagination">
+                {% if products.has_previous %}
+                    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+                {% endif %}
+    
+                {% for i in products.paginator.page_range %}
+                    {% if products.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{ i }}</a></li>
+                    {% elif i > products.number|add:'-5' and i < products.number|add:'5' %}
+                        <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                {% endfor %}
+    
+                {% if products.has_next %}
+                    <li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+                    <li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a></li>
+                {% endif %}
+            </ul>
+        {% endif %}
+    </nav>
+
+</div><!-- container // -->
+</section>
+<!-- ========================= SECTION  END// ========================= -->
+
+</body>
+</html>
+
+{% endblock content %}

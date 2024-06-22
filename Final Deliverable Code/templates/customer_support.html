@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<!-- ========================= SECTION MAIN ========================= -->
+<section class="section-intro padding-y-sm">
+    <!-- Customer Support Heading -->
+    <div class="customer-support-info text-center mt-4">
+        <h2>Welcome to Customer Support</h2>
+        <p>We are here to assist you!</p>
+    </div>
+    <br>
+
+    <div class="container">
+        <!-- Customer Support Banner -->
+        <div class="intro-banner-wrap">
+            <img src="{% static 'images/banners/customer_support_cover.jpg' %}" class="img-fluid rounded" style="display: block; margin: 0 auto;">
+        </div>
+        
+        <!-- Customer Support Information -->
+        <div class="customer-support-info text-center mt-4">
+            <h5>If you have any query, you can Contact us via:</h5>
+            <ul class="list-unstyled">
+                <li>Email: ma143faizan@gmail.com</li>
+                <li>Phone: 123-456-7890</li>
+                <li>Instagram: <a href="https://www.instagram.com/virtualcrush"> @virtualcrush</a>
+            </ul>
+        </div>
+
+    </div> <!-- container // -->
+</section>
+<!-- ========================= SECTION MAIN END// ========================= -->
+
+{% endblock content %}
